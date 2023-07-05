@@ -46,15 +46,15 @@ namespace RaysAndStuff
         private bool RayIntersection(Plane plane, Vector3 Start, Vector3 Dir, ref float t, ref Vector3 HitPt)
 		{
 
-            float vd = Vector3.Dot(plane.Normal, Dir);					// DOT-PROD BETWEEN NORMAL AND RAY DIR
+            float denom = Vector3.Dot(plane.Normal, Dir);					// DOT-PROD BETWEEN NORMAL AND RAY DIR
 
-			//If Vd > 0 then the normal of the plane is pointing away from the ray
-			//If Vd==0 RAY AND PLANE ARE PARALLEL
-			if (Math.Abs(vd)<= 1e-4f)
+			//If denom > 0 then the normal of the plane is pointing away from the ray
+			//If denom==0 RAY AND PLANE ARE PARALLEL
+			if (Math.Abs(denom)<= 1e-4f)
 				return(false);
 
 			float v0 = -(Vector3.Dot(plane.Normal, Start) + plane.D);
-            t = v0/vd;								// CALC PARAMETRIC T-VAL
+            t = v0/denom;								// CALC PARAMETRIC T-VAL
 			if (t>0)								// IF INTERSECTION NOT "BEHIND" RAY
 			{
 				HitPt = Start + Dir* t;				// CALC HIT POINT
