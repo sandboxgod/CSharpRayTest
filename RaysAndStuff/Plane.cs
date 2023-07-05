@@ -36,6 +36,12 @@ namespace RaysAndStuff
             return (false);
         }
 
+        // RETURNS THE DIST TO PT FROM PLANE (+ in dir of normal, - in opposite dir)
+        float DistanceTo(Vector3 P)
+		{
+            return -(Vector3.Dot(Normal, P) + D);
+		}
+
         public readonly Vector3 Normal;
         public readonly float D;
     }
