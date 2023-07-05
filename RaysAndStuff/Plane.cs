@@ -43,6 +43,6 @@ namespace RaysAndStuff
 		}
 
         public readonly Vector3 Normal;
-        public readonly float D;
+        public readonly float D;  // Distance from a point to the plane.
     }
 }
