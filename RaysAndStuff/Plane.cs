@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -26,8 +27,8 @@ namespace RaysAndStuff
             if (Math.Abs(denom) <= 1e-4f)
                 return (false);
 
-            float v0 = -(Vector3.Dot(Normal, Start) + D);
-            t = v0 / denom;                             // CALC PARAMETRIC T-VAL
+            float dist = -(Vector3.Dot(Normal, Start) + D);
+            t = dist / denom;                             // CALC PARAMETRIC T-VAL
             if (t > 0)                              // IF INTERSECTION NOT "BEHIND" RAY
             {
                 HitPt = Start + Dir * t;                // CALC HIT POINT
