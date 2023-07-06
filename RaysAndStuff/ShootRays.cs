@@ -14,32 +14,6 @@ namespace RaysAndStuff
         {
             CreatePlanes();
             CreateRays();
-
-            float t = 0;
-            Vector3 hitPt = new Vector3();
-            int count = 0;
-            for(int r = 0; r < rays.Count; r++)
-            {
-                Ray ray = rays[r];
-                Console.WriteLine($"Ray {r}: {ray}");
-                foreach (Plane plane in planes)
-                {
-                    if (plane.RayIntersection(ray.Start, ray.Dir, ref t, ref hitPt))
-                    {
-                        Console.WriteLine($"Ray {r} hit plane: {hitPt} at time: {t}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Ray {r} missed plane {count}");
-                    }
-                    float dist1 = plane.DistanceTo(ray.Start);
-                    Console.WriteLine($"Plane: {count} distance: {dist1}");
-                    Plane.Halfspace halfspace = plane.ClassifyPoint(ray.Start);
-                    var text = halfspace.ToString();
-                    Console.WriteLine("Classification Ray.start: " + text);
-                    count++;
-                }
-            }
         }
 
         /*
@@ -63,6 +37,35 @@ namespace RaysAndStuff
             Ray ray2 = new Ray() { Start = new Vector3(0, 100, 0), Dir = new Vector3(0, -1, 0) };
             rays.Add(ray1);
             rays.Add(ray2);
+        }
+
+        public void runTest()
+        {
+            float t = 0;
+            Vector3 hitPt = new Vector3();
+            int count = 0;
+            for (int r = 0; r < rays.Count; r++)
+            {
+                Ray ray = rays[r];
+                Console.WriteLine($"Ray {r}: {ray}");
+                foreach (Plane plane in planes)
+                {
+                    if (plane.RayIntersection(ray.Start, ray.Dir, ref t, ref hitPt))
+                    {
+                        Console.WriteLine($"Ray {r} hit plane: {hitPt} at time: {t}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Ray {r} missed plane {count}");
+                    }
+                    float dist1 = plane.DistanceTo(ray.Start);
+                    Console.WriteLine($"Plane: {count} distance: {dist1}");
+                    Plane.Halfspace halfspace = plane.ClassifyPoint(ray.Start);
+                    var text = halfspace.ToString();
+                    Console.WriteLine("Classification Ray.start: " + text);
+                    count++;
+                }
+            }
         }
 
         private List<Plane> planes = new List<Plane>();

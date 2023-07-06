@@ -3,3 +3,4 @@ using RaysAndStuff;
 
 Console.WriteLine("Hello, World!");
 ShootRays rayTest = new ShootRays();
+rayTest.runTest();
