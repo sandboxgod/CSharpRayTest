@@ -62,7 +62,7 @@ namespace RaysAndStuff
                     Console.WriteLine($"Plane: {count} distance: {dist1}");
                     Plane.Halfspace halfspace = plane.ClassifyPoint(ray.Start);
                     var text = halfspace.ToString();
-                    Console.WriteLine("Classification Ray.start: " + text);
+                    Console.WriteLine($"Classification Ray.start: {text}");
                     count++;
                 }
             }
