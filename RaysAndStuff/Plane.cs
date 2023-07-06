@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace RaysAndStuff
 {
+    /*
+     * Represents a 3 dimensional flat surface that extends indefinitely.
+     */
     internal class Plane
     {
         public enum Halfspace
@@ -52,9 +55,9 @@ namespace RaysAndStuff
 
         // RETURNS THE DIST TO PT FROM PLANE (+ in dir of normal, - in opposite dir)
         public float DistanceTo(Vector3 P)
-		{
+        {
             return Vector3.Dot(Normal, P) + D;
-		}
+        }
 
         public Halfspace ClassifyPoint(Vector3 P)
         {
