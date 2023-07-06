@@ -21,6 +21,7 @@ namespace RaysAndStuff
             for(int r = 0; r < rays.Count; r++)
             {
                 Ray ray = rays[r];
+                Console.WriteLine($"Ray {r}: {ray}");
                 foreach (Plane plane in planes)
                 {
                     if (plane.RayIntersection(ray.Start, ray.Dir, ref t, ref hitPt))
@@ -29,10 +30,13 @@ namespace RaysAndStuff
                     }
                     else
                     {
-                        Console.WriteLine("Ray missed plane " + count);
+                        Console.WriteLine($"Ray {r} missed plane {count}");
                     }
                     float dist1 = plane.DistanceTo(ray.Start);
                     Console.WriteLine($"Plane: {count} distance: {dist1}");
+                    Plane.Halfspace halfspace = plane.ClassifyPoint(ray.Start);
+                    var text = halfspace.ToString();
+                    Console.WriteLine("Classification Ray.start: " + text);
                     count++;
                 }
             }

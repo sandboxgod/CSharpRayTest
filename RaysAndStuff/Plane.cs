@@ -10,6 +10,13 @@ namespace RaysAndStuff
 {
     internal class Plane
     {
+        public enum Halfspace
+        {
+            Halfspace_BEHIND, //behind the plane
+            Halfspace_ON_PLANE,
+            Halfspace_FRONT, //in front of plane
+        };
+
         public Plane(Vector3 A, Vector3 B, Vector3 C)
         {
             Normal = Vector3.Cross((B - A), (C - A));  // NORMAL = AB X AC
@@ -48,6 +55,14 @@ namespace RaysAndStuff
 		{
             return Vector3.Dot(Normal, P) + D;
 		}
+
+        public Halfspace ClassifyPoint(Vector3 P)
+        {
+            float d = DistanceTo(P);
+            if (d == 0) return Halfspace.Halfspace_ON_PLANE;
+            if (d > 0) return Halfspace.Halfspace_FRONT;
+            return Halfspace.Halfspace_BEHIND;
+        }
 
         public readonly Vector3 Normal; // Normalized vector perpendicular to the plane
         public readonly float D;  // Distance from a point to the plane.
