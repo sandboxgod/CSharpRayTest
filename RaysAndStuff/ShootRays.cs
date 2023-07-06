@@ -13,17 +13,28 @@ namespace RaysAndStuff
         public ShootRays()
         {
             CreatePlanes();
-            Ray ray = new Ray() { Start = new Vector3(100,0,0), Dir = new Vector3(-1, 0, 0) };
+            CreateRays();
+
             float t = 0;
             Vector3 hitPt = new Vector3();
-            foreach (Plane plane in planes)
+            int count = 0;
+            for(int r = 0; r < rays.Count; r++)
             {
-                if (plane.RayIntersection(ray.Start, ray.Dir, ref t, ref hitPt))
+                Ray ray = rays[r];
+                foreach (Plane plane in planes)
                 {
-                    Console.WriteLine("Ray hit plane:" + hitPt + " at " + t);
-                } else
-                {
-                    Console.WriteLine("Ray missed plane");
+                    if (plane.RayIntersection(ray.Start, ray.Dir, ref t, ref hitPt))
+                    {
+                        Console.WriteLine($"Ray {r} hit plane: {hitPt} at time: {t}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ray missed plane " + count);
+                    }
+                    float dist1 = plane.DistanceTo(ray.Start);
+                    float dist2 = plane.SignedDistance(ray.Start);
+                    Console.WriteLine("Plane:" + count + " " + dist1 + " " + dist2);
+                    count++;
                 }
             }
         }
@@ -39,8 +50,19 @@ namespace RaysAndStuff
             Vector3 v3 = new Vector3(-4.3f, 0, 0);
             Plane p1 = new Plane(v1, v2, v3);
             planes.Add(p1);
+            planes.Add(new Plane(new Vector3(0.0f, 1.0f, 0.0f), 0.0f, new Vector3(0.0f, 0.0f, 0.0f)));
             Console.WriteLine(p1.Normal.ToString());
         }
+
+        void CreateRays()
+        {
+            Ray ray1 = new Ray() { Start = new Vector3(100, 0, 0), Dir = new Vector3(-1, 0, 0) };
+            Ray ray2 = new Ray() { Start = new Vector3(0, 100, 0), Dir = new Vector3(0, -1, 0) };
+            rays.Add(ray1);
+            rays.Add(ray2);
+        }
+
         private List<Plane> planes = new List<Plane>();
+        private List<Ray> rays = new List<Ray>();
     }
 }

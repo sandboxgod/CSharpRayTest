@@ -15,6 +15,14 @@ namespace RaysAndStuff
             Normal = Vector3.Cross((B - A), (C - A));  // NORMAL = AB X AC
             Normal = Vector3.Normalize(Normal);      // REQUIRES NORMALIZED NORMAL
             D = -Vector3.Dot(Normal, A);            // EVALUATE EQUATION WITH NORM AND PT ON PLANE TO GET D
+            Point = A;
+        }
+
+        public Plane(Vector3 normal, float d, Vector3 point)
+        {
+            Normal = normal;
+            D = d;
+            Point = point;
         }
 
         //Performs a hit test between a ray and a plane
@@ -38,12 +46,19 @@ namespace RaysAndStuff
         }
 
         // RETURNS THE DIST TO PT FROM PLANE (+ in dir of normal, - in opposite dir)
-        float DistanceTo(Vector3 P)
+        public float DistanceTo(Vector3 P)
 		{
-            return -(Vector3.Dot(Normal, P) + D);
+            return Vector3.Dot(Normal, P) + D;
 		}
 
-        public readonly Vector3 Normal;
+        public float SignedDistance(Vector3 P)
+        {
+            Vector3 dir = Vector3.Subtract(P, Point);
+            return Vector3.Dot(Normal, dir);
+        }
+
+        public readonly Vector3 Normal; // Normalized vector perpendicular to the plane
         public readonly float D;  // Distance from a point to the plane.
+        Vector3 Point;
     }
 }
