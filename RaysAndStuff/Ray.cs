@@ -18,7 +18,11 @@ namespace RaysAndStuff
 
         public override string ToString()
         {
-            return "Start:" + Start.ToString() + " Dir:" + Dir.ToString();
+            StringBuilder sb = new StringBuilder("Start:");
+            sb.Append(Start.ToString());
+            sb.Append(" Dir:");
+            sb.Append(Dir.ToString());
+            return sb.ToString();
         }
     }
 }
