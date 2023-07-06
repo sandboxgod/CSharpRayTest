@@ -32,8 +32,7 @@ namespace RaysAndStuff
                         Console.WriteLine("Ray missed plane " + count);
                     }
                     float dist1 = plane.DistanceTo(ray.Start);
-                    float dist2 = plane.SignedDistance(ray.Start);
-                    Console.WriteLine("Plane:" + count + " " + dist1 + " " + dist2);
+                    Console.WriteLine($"Plane: {count} distance: {dist1}");
                     count++;
                 }
             }
@@ -50,7 +49,7 @@ namespace RaysAndStuff
             Vector3 v3 = new Vector3(-4.3f, 0, 0);
             Plane p1 = new Plane(v1, v2, v3);
             planes.Add(p1);
-            planes.Add(new Plane(new Vector3(0.0f, 1.0f, 0.0f), 0.0f, new Vector3(0.0f, 0.0f, 0.0f)));
+            planes.Add(new Plane(new Vector3(0.0f, 1.0f, 0.0f), 0.0f));
             Console.WriteLine(p1.Normal.ToString());
         }
 
